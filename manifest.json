@@ -1,0 +1,44 @@
+{
+  "manifest_version": 2,
+  "name": "Auto login",
+  "description": "save once use forever",
+  "version": "1.0.0",
+  "icons": { "128": "icon_128.png" },
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "run_at" :"document_end",
+      "matches": ["https://gateway.iitmandi.ac.in/facstaff/login.php", "http://gateway.iitmandi.ac.in/facstaff/login.php"],
+      "js": ["script.js"]
+    },
+    {
+    	"run_at" : "document_end",
+    	"matches": ["https://insite.iitmandi.ac.in/moodle/login/index.php",
+                  "http://insite.iitmandi.ac.in/moodle/login/index.php",
+                  "https://students.iitmandi.ac.in/moodle/login/index.php"],
+    	"js" : ["script_for_moodle.js"]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "http://*/",
+    "https://*/",
+    "storage"
+  ],
+	"background":{
+		"scripts":["background.js"],
+		"persistent":false
+  },
+	"commands":{
+		"login":{
+			"suggested_key":{
+				"default": "Ctrl+Shift+0"
+			},
+      "description":"login ...",
+      "global": true
+		}
+	}
+}
